@@ -1,0 +1,46 @@
+@use "../common" as *;
+@use "../mixins" as *;
+@use  "../variables" as *;
+
+.content {
+  padding: 50px;
+  &-cards {
+    padding-top: 30px;
+  }
+}
+
+.card {
+  padding: 30px;
+  max-width: 210px;
+  background: #FFFFFF;
+  border: 1px solid #F3F3F3;
+  border-radius: 40px;
+  &__like {
+
+  }
+  &__image {}
+  &__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $color-black;
+    padding-bottom: 24px;
+  }
+  &__info {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__price {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    text-transform: uppercase;
+    color: $color-gray;
+  }
+  &__sum {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: $color-black;
+  }
+}

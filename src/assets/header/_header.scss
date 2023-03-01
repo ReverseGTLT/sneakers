@@ -1,0 +1,46 @@
+@use "../common" as *;
+@use "../mixins" as *;
+@use  "../variables" as *;
+
+
+.header {
+  border: 1px solid $color-border-bottom;
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+  }
+  &-left {
+    display: flex;
+    gap: 16px;
+    &__logo {}
+    &__title {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      text-transform: uppercase;
+      color: $color-black;
+    }
+    &__description {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $color-gray;
+    }
+  }
+  &-right {
+    display: flex;
+    gap: 30px;
+    &__basket {
+      display: flex;
+      gap: 10px;
+    }
+    &__description {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: $color-dark;
+    }
+  }
+}
