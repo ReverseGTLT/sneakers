@@ -2,10 +2,45 @@
 @use "../mixins" as *;
 @use  "../variables" as *;
 
+.main {
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
 .content {
   padding: 50px;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  &-info {
+    padding-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   &-cards {
     padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+.search {
+  &-box {
+    position: relative;
+  }
+  &-image {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+  }
+  &-input {
+    font-size: 16px;
+    width: 250px;
+    height: 45px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding-left: 40px;
   }
 }
 
@@ -15,8 +50,14 @@
   background: #FFFFFF;
   border: 1px solid #F3F3F3;
   border-radius: 40px;
+  transition: 0.2s;
+  &:hover {
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.05);
+    border-radius: 40px;
+    transform: translateY(-5px);
+  }
   &__like {
-
+    width: 32px;
   }
   &__image {}
   &__title {
@@ -24,7 +65,7 @@
     font-size: 14px;
     line-height: 17px;
     color: $color-black;
-    padding-bottom: 24px;
+    padding-bottom: 14px;
   }
   &__info {
     display: flex;
@@ -42,5 +83,34 @@
     font-size: 14px;
     line-height: 17px;
     color: $color-black;
+  }
+  &__card {
+  }
+}
+
+.card__like svg path {
+  transition: 0.1s;
+}
+
+.card__like {
+  &:hover svg path {
+    fill: #3b3939;
+  }
+  &:active svg path {
+    fill: black;
+    scale: 1.1;
+  }
+}
+
+.card__plus svg path {
+  transition: 0.1s;
+}
+.card__plus {
+  &:hover svg path {
+    fill: #3b3939;
+  }
+  &:active svg path {
+    fill: black;
+    scale: 1.05;
   }
 }

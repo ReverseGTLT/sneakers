@@ -5,3 +5,25 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  font-family: "Inter", serif;
+  background-color: #C6D4DC;
+}
+
+button, input {
+  font-family: "Inter", serif;
+}
+
+.wrapper {
+  background-color: #fff;
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-top: 50px;
+  border-radius: 50px;
+  margin-bottom: 50px;
+}
+
+.cursor {
+  cursor: pointer;
+}

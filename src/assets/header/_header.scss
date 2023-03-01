@@ -5,6 +5,8 @@
 
 .header {
   border: 1px solid $color-border-bottom;
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px;
   &-wrapper {
     display: flex;
     justify-content: space-between;

@@ -3,14 +3,16 @@ import Header from "./futures/Header";
 import Main from "./futures/Main";
 import Slider from "./futures/Slider";
 import Content from "./futures/Content";
+import Overlay from "./futures/Overlay";
 
 function App() {
   return (
     <>
-        <Header />
-        <Main>
-
-        </Main>
+       <div className="wrapper">
+           <Overlay/>
+           <Header />
+           <Main/>
+       </div>
     </>
   );
 }
