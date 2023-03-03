@@ -19,9 +19,12 @@
   }
   &-cards {
     padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    @include lg {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }
 
@@ -46,7 +49,7 @@
 
 .card {
   padding: 30px;
-  max-width: 210px;
+  //max-width: 210px;
   background: #FFFFFF;
   border: 1px solid #F3F3F3;
   border-radius: 40px;
@@ -59,7 +62,14 @@
   &__like {
     width: 32px;
   }
-  &__image {}
+  &__image {
+    width: 133px;
+    height: 112px;
+    margin: auto;
+    img {
+      width: 100%;
+    }
+  }
   &__title {
     font-weight: 400;
     font-size: 14px;

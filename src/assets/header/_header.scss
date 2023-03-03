@@ -37,6 +37,7 @@
     &__basket {
       display: flex;
       gap: 10px;
+      cursor: pointer;
     }
     &__description {
       font-weight: 600;

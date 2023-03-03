@@ -1,6 +1,10 @@
+
 import Card from "./Card";
+import products from "../ProductsApi";
+import {useState} from "react";
 
 export default function Content() {
+
     return (
         <div className="content">
             <div className="content-info">
@@ -11,10 +15,12 @@ export default function Content() {
                 </div>
             </div>
             <div className="content-cards">
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
+                { products.map((item) => (
+                    <Card image={item.image}
+                          title={item.title}
+                          price={item.price}
+                    />
+                )) }
             </div>
         </div>
     )

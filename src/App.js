@@ -1,16 +1,18 @@
-import { React, ReactDOM, Fragment } from "react";
-import Header from "./futures/Header";
-import Main from "./futures/Main";
-import Slider from "./futures/Slider";
-import Content from "./futures/Content";
-import Overlay from "./futures/Overlay";
+import {React, useState} from "react";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Overlay from "./components/Overlay";
 
 function App() {
+    const [cartOpen, setCartOpen] = useState(false)
+
   return (
     <>
        <div className="wrapper">
-           <Overlay/>
-           <Header />
+           {cartOpen && <Overlay
+               onCloseInBasketClick={() => setCartOpen(false)}/>}
+           <Header
+               onBasketClick={() => setCartOpen(true)}/>
            <Main/>
        </div>
     </>
