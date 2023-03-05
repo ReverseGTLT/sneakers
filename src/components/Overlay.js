@@ -1,7 +1,7 @@
-import {React} from "react";
+import React from "react";
 import CartItem from "./CartItem";
 
-export default function Overlay({ onCloseInBasketClick, items }) {
+export default function Overlay({ onCloseInBasketClick, items= [] }) {
     return (
         <div className="overlay">
             <div className="drawer">
@@ -20,7 +20,9 @@ export default function Overlay({ onCloseInBasketClick, items }) {
                             <CartItem
                                 title={item.title}
                                 price={item.price}
-                                image={item.image}/>
+                                image={item.image}
+                                key={item.id}
+                            />
                         ))}
                     </div>
                     <div className="cart-footer">

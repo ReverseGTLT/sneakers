@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Overlay from "./components/Overlay";
@@ -10,9 +10,10 @@ function App() {
     const [item, setItem] = useState([]);
     const [cartItems, setCartItems] = useState([]);
 
-    const addedToCart = (obj) => {
+    const addToCart = (obj) => {
         setCartItems(currentValue => [...currentValue, obj])
     }
+
 
     useEffect(() => {
         fetch(URL)
@@ -30,10 +31,10 @@ function App() {
        <div className="wrapper">
            {cartOpen && <Overlay
                onCloseInBasketClick={() => setCartOpen(false)}
-           items={cartItems}/>}
+               items={cartItems}/>}
            <Header
                onBasketClick={() => setCartOpen(true)}/>
-           <Main getItem={item} targetCartItems={addedToCart}/>
+           <Main getItem={item} targetCartItems={addToCart} />
        </div>
     </>
   );

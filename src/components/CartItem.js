@@ -1,6 +1,6 @@
-import {React} from "react";
+import React from "react";
 
-export default function CartItem({ title, price, image }) {
+export default function CartItem({ title, price, image}) {
 
     return (
         <div className="cart-item">
