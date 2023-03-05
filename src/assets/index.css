@@ -121,6 +121,12 @@ button, input {
   margin-bottom: 30px;
   overflow: auto;
 }
+.cart-item__image {
+  width: 133px;
+}
+.cart-item__image img {
+  width: 100%;
+}
 .cart-item__title {
   font-weight: 400;
   font-size: 14px;

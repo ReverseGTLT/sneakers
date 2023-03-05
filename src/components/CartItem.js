@@ -1,15 +1,15 @@
 import {React} from "react";
 
-export default function CartItem(props) {
+export default function CartItem({ title, price, image }) {
 
     return (
         <div className="cart-item">
             <div className="cart-item__image">
-                <img src="image/cart-sneakers.svg" alt="Sneakers"/>
+                <img src={image} alt="Sneakers"/>
             </div>
             <div className="cart-item__info">
-                <p className="cart-item__title">Мужские Кроссовки Nike Air Max 270</p>
-                <p className="cart-item__description">12 999 руб.</p>
+                <p className="cart-item__title">{title}</p>
+                <p className="cart-item__description">{price} руб.</p>
             </div>
             <div className="cart-item__cancel">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

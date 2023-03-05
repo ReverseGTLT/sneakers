@@ -53,7 +53,12 @@
     align-items: center;
     margin-bottom: 30px;
     overflow: auto;
-    &__image {}
+    &__image {
+      width: 133px;
+      img {
+        width: 100%;
+      }
+    }
     &__info {}
     &__title {
       font-weight: 400;

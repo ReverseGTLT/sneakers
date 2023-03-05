@@ -1,9 +1,7 @@
 
 import Card from "./Card";
-import products from "../ProductsApi";
-import {useState} from "react";
 
-export default function Content() {
+export default function Content({ itemGet, targetCartItems }) {
 
     return (
         <div className="content">
@@ -15,10 +13,11 @@ export default function Content() {
                 </div>
             </div>
             <div className="content-cards">
-                { products.map((item) => (
+                { itemGet.map((item) => (
                     <Card image={item.image}
                           title={item.title}
                           price={item.price}
+                          onPlus={() => targetCartItems(item)}
                     />
                 )) }
             </div>
