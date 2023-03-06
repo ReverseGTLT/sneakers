@@ -1,7 +1,8 @@
 import React from "react";
 import CartItem from "./CartItem";
 
-export default function Overlay({ onCloseInBasketClick, items= [] }) {
+export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove }) {
+
     return (
         <div className="overlay">
             <div className="drawer">
@@ -15,32 +16,51 @@ export default function Overlay({ onCloseInBasketClick, items= [] }) {
                             </svg>
                         </div>
                     </div>
-                    <div className="cart-items">
-                        {items.map((item) => (
-                            <CartItem
-                                title={item.title}
-                                price={item.price}
-                                image={item.image}
-                                key={item.id}
-                            />
-                        ))}
-                    </div>
-                    <div className="cart-footer">
-                        <div className="cart-footer__item">
-                            <p className="cart-footer__title">Итого:</p>
-                            <div className="cart-footer__dots"></div>
-                            <p className="cart-footer__description">21 498 руб.</p>
+                    {items.length === 0 ? <div className="cart-empty">
+                        <div className="cart-empty__image">
+                            <img src="/image/empty-cart.png" alt="empty cart"/>
                         </div>
-                        <div className="cart-footer__item">
-                            <p className="cart-footer__title">Налог 5%:</p>
-                            <div className="cart-footer__dots"></div>
-                            <p className="cart-footer__description">1074 руб.</p>
-                        </div>
-                        <button className="cart-btn">
-                            <p className="cart-btn__title">Оформить заказ</p>
-                            <img src="image/arrow.svg" alt="arrow" className="cart-btn__image"/>
+                        <h3 className="cart-empty__title">Корзина пустая</h3>
+                        <p className="cart-empty__description">Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
+                        <button className="cart-empty__btn" onClick={onCloseInBasketClick}>
+                            <div className="cart-empty__btn-before">
+                                <img src="/image/arrow-left.svg" alt="arrow"/>
+                            </div>
+                            <p>Назад к покупкам</p>
                         </button>
-                    </div>
+                    </div> :
+                    <div>
+                        <div className="cart-items">
+                            {items
+                                .map((item, index) => (
+                                    <CartItem
+                                        title={item.title}
+                                        price={item.price}
+                                        image={item.image}
+                                        onClickRemove={onClickRemove}
+                                        key={index}
+                                        itemId={item.id}
+                                        items={items}
+                                    />
+                                ))}
+                        </div>
+                        <div className="cart-footer">
+                            <div className="cart-footer__item">
+                                <p className="cart-footer__title">Итого:</p>
+                                <div className="cart-footer__dots"></div>
+                                <p className="cart-footer__description">21 498 руб.</p>
+                            </div>
+                            <div className="cart-footer__item">
+                                <p className="cart-footer__title">Налог 5%:</p>
+                                <div className="cart-footer__dots"></div>
+                                <p className="cart-footer__description">1074 руб.</p>
+                            </div>
+                            <button className="cart-btn">
+                                <p className="cart-btn__title">Оформить заказ</p>
+                                <img src="image/arrow.svg" alt="arrow" className="cart-btn__image"/>
+                            </button>
+                        </div>
+                    </div>}
                 </div>
             </div>
         </div>

@@ -105,6 +105,64 @@ button, input {
   justify-content: space-between;
   padding-bottom: 30px;
 }
+.cart-empty {
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  flex: 1;
+}
+.cart-empty__image {
+  width: 120px;
+  height: 120px;
+}
+.cart-empty__image img {
+  width: 100%;
+}
+.cart-empty__title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  color: #000000;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.cart-empty__description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  opacity: 0.4;
+  text-align: center;
+  padding-bottom: 30px;
+}
+.cart-empty__btn {
+  width: 245px;
+  height: 55px;
+  background: #9DD458;
+  border-radius: 18px;
+  border: 0;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+.cart-empty__btn-before {
+  transition: 0.2s;
+  width: 16px;
+  height: 14px;
+}
+.cart-empty__btn-before img {
+  height: 100%;
+  width: 100%;
+}
 .cart-title {
   font-weight: 700;
   font-size: 24px;
@@ -205,6 +263,10 @@ button, input {
   transform: translateX(5px);
 }
 
+.cart-empty__btn:hover .cart-empty__btn-before {
+  transform: translateX(5px);
+}
+
 .main {
   border-bottom-right-radius: 50px;
   border-bottom-left-radius: 50px;
@@ -235,6 +297,11 @@ button, input {
 
 .search-box {
   position: relative;
+}
+.search-box .cart-item__cancel {
+  position: absolute;
+  top: 6px;
+  right: 6px;
 }
 .search-image {
   position: absolute;
