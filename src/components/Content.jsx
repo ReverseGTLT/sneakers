@@ -2,7 +2,7 @@
 import Card from "./Card";
 import React from "react";
 
-export default function Content({ itemGet, targetCartItems, search, searchValue, getSetSearchItem }) {
+export default function Content({ itemGet, targetCartItems, search, searchValue, getSetSearchItem, addToFavorites }) {
 
     const filterSearchItem = (item) => {
         return item.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -34,6 +34,7 @@ export default function Content({ itemGet, targetCartItems, search, searchValue,
                           price={item.price}
                           key={index}
                           onPlus={() => targetCartItems(item)}
+                          onFavorite={() => addToFavorites(item)}
                     />
                 )) }
             </div>

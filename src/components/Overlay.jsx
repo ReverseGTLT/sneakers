@@ -2,7 +2,10 @@ import React from "react";
 import CartItem from "./CartItem";
 
 export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove }) {
-
+    let sum = items.reduce((acc, item) => {
+        acc += +item.price.replace(' ', '')
+        return acc
+    }, 0)
     return (
         <div className="overlay">
             <div className="drawer">
@@ -29,7 +32,7 @@ export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove
                             <p>Назад к покупкам</p>
                         </button>
                     </div> :
-                    <div>
+                    <>
                         <div className="cart-items">
                             {items
                                 .map((item, index) => (
@@ -48,19 +51,19 @@ export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove
                             <div className="cart-footer__item">
                                 <p className="cart-footer__title">Итого:</p>
                                 <div className="cart-footer__dots"></div>
-                                <p className="cart-footer__description">21 498 руб.</p>
+                                <p className="cart-footer__description">{`${sum} руб.`}</p>
                             </div>
                             <div className="cart-footer__item">
-                                <p className="cart-footer__title">Налог 5%:</p>
+                                <p className="cart-footer__title">Налог 5%: руб.</p>
                                 <div className="cart-footer__dots"></div>
-                                <p className="cart-footer__description">1074 руб.</p>
+                                <p className="cart-footer__description">{`${(sum/100*5).toFixed(2)} руб.`}</p>
                             </div>
                             <button className="cart-btn">
                                 <p className="cart-btn__title">Оформить заказ</p>
                                 <img src="image/arrow.svg" alt="arrow" className="cart-btn__image"/>
                             </button>
                         </div>
-                    </div>}
+                    </>}
                 </div>
             </div>
         </div>
