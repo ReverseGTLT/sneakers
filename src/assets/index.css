@@ -76,6 +76,11 @@ a {
   color: #5C5C5C;
 }
 
+.skeleton {
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+
 .overlay {
   position: fixed;
   overflow: auto;

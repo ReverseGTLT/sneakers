@@ -1,11 +1,41 @@
 
 import Card from "./Card";
 import React from "react";
+import MyLoader from "./Skeleton";
+import {AppContext} from "../App";
 
-export default function Content({ itemGet, targetCartItems, search, searchValue, getSetSearchItem, addToFavorites }) {
+export default function Content({
+    itemGet,
+    isLoading,
+    cartItems,
+    targetCartItems,
+    search,
+    searchValue,
+    getSetSearchItem,
+    addToFavorites }) {
 
+    const { isItemAdded, isItemFavorite } = React.useContext(AppContext)
     const filterSearchItem = (item) => {
         return item.title.toLowerCase().includes(searchValue.toLowerCase())
+    }
+    const renderItems = () => {
+        return itemGet
+            .filter(filterSearchItem)
+            .map((item, index) => (
+                <Card image={item.image}
+                      title={item.title}
+                      price={item.price}
+                      id={item.id}
+                      isItemAdded={() => isItemAdded(item.id)}
+                      isItemFavorite={() => isItemFavorite(item.id)}
+                      cartItems={cartItems}
+                      key={index}
+                      onPlus={() => targetCartItems(item)}
+                      onFavorite={() => addToFavorites(item)}
+                      addedToCartItem={cartItems.some(obj => Number(obj.id) === Number(item.id))}
+                />
+
+            ))
     }
 
     return (
@@ -26,17 +56,8 @@ export default function Content({ itemGet, targetCartItems, search, searchValue,
                 </div>
             </div>
             <div className="content-cards">
-                { itemGet
-                    .filter(filterSearchItem)
-                    .map((item, index) => (
-                    <Card image={item.image}
-                          title={item.title}
-                          price={item.price}
-                          key={index}
-                          onPlus={() => targetCartItems(item)}
-                          onFavorite={() => addToFavorites(item)}
-                    />
-                )) }
+                { isLoading ? MyLoader()
+                : renderItems()}
             </div>
         </div>
     )
