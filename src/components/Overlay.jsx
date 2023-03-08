@@ -1,8 +1,8 @@
 import React from "react";
 import CartItem from "./CartItem";
 
-export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove }) {
-    let sum = items.reduce((acc, item) => {
+export default function Overlay({ onCloseInBasketClick, cartItems= [], onClickRemove }) {
+    let sum = cartItems.reduce((acc, item) => {
         acc += +item.price.replace(' ', '')
         return acc
     }, 0)
@@ -19,7 +19,7 @@ export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove
                             </svg>
                         </div>
                     </div>
-                    {items.length === 0 ? <div className="cart-empty">
+                    {cartItems.length === 0 ? <div className="cart-empty">
                         <div className="cart-empty__image">
                             <img src="/image/empty-cart.png" alt="empty cart"/>
                         </div>
@@ -34,7 +34,7 @@ export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove
                     </div> :
                     <>
                         <div className="cart-items">
-                            {items
+                            {cartItems
                                 .map((item, index) => (
                                     <CartItem
                                         title={item.title}
@@ -43,7 +43,7 @@ export default function Overlay({ onCloseInBasketClick, items= [], onClickRemove
                                         onClickRemove={onClickRemove}
                                         key={index}
                                         itemId={item.id}
-                                        items={items}
+                                        cartItems={cartItems}
                                     />
                                 ))}
                         </div>

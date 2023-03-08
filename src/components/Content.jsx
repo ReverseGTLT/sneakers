@@ -5,32 +5,29 @@ import MyLoader from "./Skeleton";
 import {AppContext} from "../App";
 
 export default function Content({
-    itemGet,
-    isLoading,
-    cartItems,
-    targetCartItems,
-    search,
-    searchValue,
-    getSetSearchItem,
-    addToFavorites }) {
+                                    item,
+                                    isLoading,
+                                    cartItems,
+                                    addToCart,
+                                    searchMain,
+                                    searchValue,
+                                    getSetSearchItem,
+                                    addToFavorites }) {
 
-    const { isItemAdded, isItemFavorite } = React.useContext(AppContext)
     const filterSearchItem = (item) => {
         return item.title.toLowerCase().includes(searchValue.toLowerCase())
     }
     const renderItems = () => {
-        return itemGet
+        return item
             .filter(filterSearchItem)
             .map((item, index) => (
                 <Card image={item.image}
                       title={item.title}
                       price={item.price}
-                      id={item.id}
-                      isItemAdded={() => isItemAdded(item.id)}
-                      isItemFavorite={() => isItemFavorite(item.id)}
+                      id={item.title}
                       cartItems={cartItems}
                       key={index}
-                      onPlus={() => targetCartItems(item)}
+                      onPlus={() => addToCart(item)}
                       onFavorite={() => addToFavorites(item)}
                       addedToCartItem={cartItems.some(obj => Number(obj.id) === Number(item.id))}
                 />
@@ -44,7 +41,7 @@ export default function Content({
                 <h1 className="content__title">{searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}</h1>
                 <div className="search-box">
                     <img className="search-image" src="image/search.svg" alt="Search"/>
-                    <input className="search-input" onChange={search} value={searchValue} type="text" placeholder="Поиск..."/>
+                    <input className="search-input" onChange={searchMain} value={searchValue} type="text" placeholder="Поиск..."/>
                     {searchValue && <div className="cart-item__cancel" onClick={() => getSetSearchItem('')}>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" fill="white" stroke="#DBDBDB"/>
@@ -57,7 +54,7 @@ export default function Content({
             </div>
             <div className="content-cards">
                 { isLoading ? MyLoader()
-                : renderItems()}
+                    : renderItems()}
             </div>
         </div>
     )

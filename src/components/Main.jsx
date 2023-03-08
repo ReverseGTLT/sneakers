@@ -4,26 +4,26 @@ import {Route, Routes} from "react-router-dom";
 import Favorites from "./Favorites";
 import {useContext} from "react";
 
-export default function Main({ targetCartItems, isLoading, cartItems, items , getItem, search, searchValue, getSetSearchItem, addToFavorites }) {
+export default function Main({ addToCart, isLoading, cartItems, items , item, searchMain, searchValue, getSetSearchItem, addToFavorites }) {
 
     return (
         <div className="main">
             <Slider/>
             <Routes>
                 <Route exact path="/"
-                       element= {<Content itemGet={getItem}
+                       element= {<Content item={item}
                                           cartItems={cartItems}
-                                          targetCartItems={targetCartItems}
+                                          addToCart={addToCart}
                                           addToFavorites={addToFavorites}
-                                          search={search}
+                                          searchMain={searchMain}
                                           searchValue={searchValue}
                                           getSetSearchItem={getSetSearchItem}
                                           isLoading={isLoading}
                 />} />
 
                 <Route exact path="/favorites"
-                       element={<Favorites itemGet={getItem}
-                                           targetCartItems={targetCartItems}
+                       element={<Favorites item={item}
+                                           addToCart={addToCart}
                                            addToFavorites={addToFavorites}
                                            items={items}
                 />} />

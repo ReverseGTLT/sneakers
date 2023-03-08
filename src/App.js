@@ -22,8 +22,8 @@ function App() {
     };
     const addToCart = async (obj) => {
         try{
-            if (cartItems.find(itemObj => Number(itemObj.id) === Number(obj.id))) {
-                setCartItems(prevState => prevState.filter(item => Number(item.id) !== Number(obj.id)));
+            if (cartItems.find(itemObj => itemObj.title === obj.title)) {
+                setCartItems(prevState => prevState.filter(item => item.title !== obj.title));
                 axios.delete(`${URL_USER_CART}/${obj.id}`);
             } else {
                 const res = await axios.post(URL_USER_CART, obj);
@@ -36,8 +36,8 @@ function App() {
     const addToFavorites = async (obj) => {
         try{
             if (favoriteItems.find(itemObj => Number(itemObj.id) === Number(obj.id))) {
-                axios.delete(`${URL_FAVORITES}/${obj.id}`);
                 setFavoriteItems(prevState => prevState.filter(item => Number(item.id) !== Number(obj.id)));
+                axios.delete(`${URL_FAVORITES}/${obj.id}`);
             } else {
                 const res = await axios.post(URL_FAVORITES, obj);
                 setFavoriteItems(prevState => [...prevState, res.data]);
@@ -51,11 +51,11 @@ function App() {
         setCartItems(prevState => prevState.filter(item => item.id !== id));
 
     };
-    const isItemAdded = (id) => {
-        return cartItems.some((obj) => +obj.id === +id)
+    const isItemAdded = (title) => {
+        return cartItems.some((obj) => obj.title === title)
     };
-    const isItemFavorite = (id) => {
-        return favoriteItems.some((obj) => +obj.id === +id)
+    const isItemFavorite = (title) => {
+        return favoriteItems.some((obj) => obj.title === title)
     };
 
     useEffect(() => {
@@ -79,33 +79,33 @@ function App() {
         fetchData();
     }, []);
 
-  return (
-    <>
-       <AppContext.Provider value={ { item, cartItems, favoriteItems, isItemAdded, isItemFavorite } }>
-           <div className="wrapper">
-               {cartOpen &&
-               <Overlay
-                   onCloseInBasketClick={() => setCartOpen(false)}
-                   items={cartItems}
-                   onClickRemove={removeFromCart}
-               />}
+    return (
+        <>
+            <AppContext.Provider value={ { item, cartItems, favoriteItems, isItemAdded, isItemFavorite } }>
+                <div className="wrapper">
+                    {cartOpen &&
+                        <Overlay
+                            onCloseInBasketClick={() => setCartOpen(false)}
+                            cartItems={cartItems}
+                            onClickRemove={removeFromCart}
+                        />}
 
-               <Header onBasketClick={() => setCartOpen(true)}/>
+                    <Header onBasketClick={() => setCartOpen(true)}/>
 
-               <Main getItem={item}
-                     cartItems={cartItems}
-                     targetCartItems={addToCart}
-                     addToFavorites={addToFavorites}
-                     search={searchMain}
-                     searchValue={searchItem}
-                     getSetSearchItem={setSearchItem}
-                     items={favoriteItems}
-                     isLoading={isLoading}
-               />
-           </div>
-       </AppContext.Provider>
-    </>
-  );
+                    <Main item={item}
+                          cartItems={cartItems}
+                          addToCart={addToCart}
+                          addToFavorites={addToFavorites}
+                          searchMain={searchMain}
+                          searchValue={searchItem}
+                          getSetSearchItem={setSearchItem}
+                          items={favoriteItems}
+                          isLoading={isLoading}
+                    />
+                </div>
+            </AppContext.Provider>
+        </>
+    );
 }
 
 export default App;
