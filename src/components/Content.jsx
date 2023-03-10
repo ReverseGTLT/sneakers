@@ -1,18 +1,17 @@
-
 import Card from "./Card";
 import React from "react";
 import MyLoader from "./Skeleton";
 import {AppContext} from "../App";
 
 export default function Content({
-                                    item,
-                                    isLoading,
-                                    cartItems,
-                                    addToCart,
-                                    searchMain,
-                                    searchValue,
-                                    getSetSearchItem,
-                                    addToFavorites }) {
+    item,
+    isLoading,
+    cartItems,
+    addToCart,
+    searchMain,
+    searchValue,
+    getSetSearchItem,
+    addToFavorites }) {
 
     const filterSearchItem = (item) => {
         return item.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -21,16 +20,16 @@ export default function Content({
         return item
             .filter(filterSearchItem)
             .map((item, index) => (
-                <Card image={item.image}
-                      title={item.title}
-                      price={item.price}
-                      id={item.title}
-                      cartItems={cartItems}
-                      key={index}
-                      onPlus={() => addToCart(item)}
-                      onFavorite={() => addToFavorites(item)}
-                      addedToCartItem={cartItems.some(obj => Number(obj.id) === Number(item.id))}
-                />
+            <Card image={item.image}
+                  title={item.title}
+                  price={item.price}
+                  id={item.title}
+                  cartItems={cartItems}
+                  key={index}
+                  onPlus={() => addToCart(item)}
+                  onFavorite={() => addToFavorites(item)}
+                  addedToCartItem={cartItems.some(obj => Number(obj.id) === Number(item.id))}
+            />
 
             ))
     }

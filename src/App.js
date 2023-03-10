@@ -5,8 +5,9 @@ import Overlay from "./components/Overlay";
 import axios from "axios";
 
 const URL = 'https://64023e33f61d96ac4866f0b0.mockapi.io/items';
-const URL_USER_CART = 'https://64023e33f61d96ac4866f0b0.mockapi.io/userCart';
+export const URL_USER_CART = 'https://64023e33f61d96ac4866f0b0.mockapi.io/userCart';
 const URL_FAVORITES = 'https://64062d8f40597b65de4c746a.mockapi.io/favorites';
+export const URL_ORDERS = 'https://64062d8f40597b65de4c746a.mockapi.io/orders';
 
 export const AppContext = createContext({})
 
@@ -57,6 +58,9 @@ function App() {
     const isItemFavorite = (title) => {
         return favoriteItems.some((obj) => obj.title === title)
     };
+    const onCloseInBasketClick = () => {
+        return setCartOpen(false)
+    };
 
     useEffect(() => {
         async function fetchData () {
@@ -79,18 +83,18 @@ function App() {
         fetchData();
     }, []);
 
+
     return (
         <>
-            <AppContext.Provider value={ { item, cartItems, favoriteItems, isItemAdded, isItemFavorite } }>
+            <AppContext.Provider value={ { item, cartItems, favoriteItems, isItemAdded, isItemFavorite, onCloseInBasketClick, setCartItems } }>
                 <div className="wrapper">
                     {cartOpen &&
-                        <Overlay
-                            onCloseInBasketClick={() => setCartOpen(false)}
-                            cartItems={cartItems}
-                            onClickRemove={removeFromCart}
-                        />}
+                    <Overlay
+                        cartItems={cartItems}
+                        onClickRemove={removeFromCart}
+                    />}
 
-                    <Header onBasketClick={() => setCartOpen(true)}/>
+                    <Header setCartOpen={() => setCartOpen(true)}/>
 
                     <Main item={item}
                           cartItems={cartItems}

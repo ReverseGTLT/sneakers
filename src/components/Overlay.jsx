@@ -1,7 +1,39 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import CartItem from "./CartItem";
+import {AppContext, URL_USER_CART} from "../App";
+import CartEmpty from "./CartEmpty";
+import axios from "axios";
+import {URL_ORDERS} from "../App";
 
-export default function Overlay({ onCloseInBasketClick, cartItems= [], onClickRemove }) {
+export default function Overlay({ onClickRemove }) {
+
+    const { onCloseInBasketClick, setCartItems, cartItems } = useContext(AppContext);
+    const [isDone, setIsDone] = React.useState(false);
+    const [orderId, setOrderId] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+    const onClickOrder = async () => {
+        try {
+            setIsLoading(true)
+            const {data} = await axios.post(URL_ORDERS, {
+                items: cartItems
+            });
+
+            for (let i = 0; i < cartItems.length; i++) {
+                const item = cartItems[i];
+                await axios.delete(`${URL_USER_CART}/${item.id}`);
+                await delay(1000);
+            }
+
+            setOrderId(data.id);
+            setIsDone(true);
+            setCartItems([]);
+        } catch (error) {
+            console.log(error, 'Не удалось создать заказ')
+        }
+        setIsLoading(false)
+    }
+
     let sum = cartItems.reduce((acc, item) => {
         acc += +item.price.replace(' ', '')
         return acc
@@ -19,19 +51,13 @@ export default function Overlay({ onCloseInBasketClick, cartItems= [], onClickRe
                             </svg>
                         </div>
                     </div>
-                    {cartItems.length === 0 ? <div className="cart-empty">
-                        <div className="cart-empty__image">
-                            <img src="/image/empty-cart.png" alt="empty cart"/>
-                        </div>
-                        <h3 className="cart-empty__title">Корзина пустая</h3>
-                        <p className="cart-empty__description">Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-                        <button className="cart-empty__btn" onClick={onCloseInBasketClick}>
-                            <div className="cart-empty__btn-before">
-                                <img src="/image/arrow-left.svg" alt="arrow"/>
-                            </div>
-                            <p>Назад к покупкам</p>
-                        </button>
-                    </div> :
+                    {cartItems.length === 0 ?
+                    <CartEmpty
+                        image={isDone ? "/image/cart-done.png" : "/image/empty-cart.png"}
+                        title={isDone ? "Заказ оформлен!" : "Корзина пустая"}
+                        description={isDone ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+                    />
+                        :
                     <>
                         <div className="cart-items">
                             {cartItems
@@ -58,9 +84,9 @@ export default function Overlay({ onCloseInBasketClick, cartItems= [], onClickRe
                                 <div className="cart-footer__dots"></div>
                                 <p className="cart-footer__description">{`${(sum/100*5).toFixed(2)} руб.`}</p>
                             </div>
-                            <button className="cart-btn">
+                            <button className="cart-btn" disabled={isLoading} onClick={onClickOrder}>
                                 <p className="cart-btn__title">Оформить заказ</p>
-                                <img src="image/arrow.svg" alt="arrow" className="cart-btn__image"/>
+                                <img src="/image/arrow.svg" alt="arrow" className="cart-btn__image"/>
                             </button>
                         </div>
                     </>}
