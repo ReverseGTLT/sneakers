@@ -7,7 +7,7 @@ import {URL_ORDERS} from "../App";
 
 export default function Overlay({ onClickRemove }) {
 
-    const { onCloseInBasketClick, setCartItems, cartItems } = useContext(AppContext);
+    const { onCloseInBasketClick, setCartItems, cartItems, sum } = useContext(AppContext);
     const [isDone, setIsDone] = React.useState(false);
     const [orderId, setOrderId] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(false);
@@ -34,10 +34,7 @@ export default function Overlay({ onClickRemove }) {
         setIsLoading(false)
     }
 
-    let sum = cartItems.reduce((acc, item) => {
-        acc += +item.price.replace(' ', '')
-        return acc
-    }, 0)
+
     return (
         <div className="overlay">
             <div className="drawer">
