@@ -2,7 +2,6 @@ import Content from "./Content";
 import Slider from "./Slider";
 import {Route, Routes} from "react-router-dom";
 import Favorites from "./Favorites";
-import {useContext} from "react";
 import Orders from "./Orders";
 
 export default function Main({ addToCart, isLoading, cartItems, items , item, searchMain, searchValue, getSetSearchItem, addToFavorites }) {
@@ -11,7 +10,7 @@ export default function Main({ addToCart, isLoading, cartItems, items , item, se
         <div className="main">
             <Slider/>
             <Routes>
-                <Route exact path="/"
+                <Route exact path=""
                        element= {<Content item={item}
                                           cartItems={cartItems}
                                           addToCart={addToCart}
@@ -22,7 +21,7 @@ export default function Main({ addToCart, isLoading, cartItems, items , item, se
                                           isLoading={isLoading}
                        />} />
 
-                <Route exact path="/favorites"
+                <Route exact path="favorites"
                        element={<Favorites item={item}
                                            addToCart={addToCart}
                                            addToFavorites={addToFavorites}
@@ -30,7 +29,7 @@ export default function Main({ addToCart, isLoading, cartItems, items , item, se
                                            isLoading={isLoading}
                        />} />
 
-                <Route exact path="/order"
+                <Route exact path="order"
                        element={<Orders isLoading={isLoading}/>} />
 
             </Routes>
