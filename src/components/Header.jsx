@@ -9,7 +9,7 @@ export default function Header({ setCartOpen }) {
                 <Link to="/">
                     <div className="header-left">
                         <div className="header-left__logo">
-                            <img width={40} height={40} src="./image/logo.svg" alt=""/>
+                            <img width={40} height={40} src="image/logo.svg" alt=""/>
                         </div>
                         <div className="header-info">
                             <h3 className="header-left__title">REACT SNEAKERS</h3>

@@ -1,7 +1,6 @@
 import Card from "./Card";
 import React from "react";
 import MyLoader from "./Skeleton";
-import {AppContext} from "../App";
 
 export default function Content({
                                     item,

@@ -1,8 +1,6 @@
-import React, {useContext} from "react";
-import {AppContext} from "../App";
+import React from "react";
 
 export default function CartItem({ title, price, image, onClickRemove, itemId }) {
-    const { cartItems } = React.useContext(AppContext)
 
     return (
         <div className="cart-item">

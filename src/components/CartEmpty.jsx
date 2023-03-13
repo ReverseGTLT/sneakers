@@ -4,7 +4,7 @@ import React, {useContext} from "react";
 
 export default function CartEmpty({ image, imageAlt, title, description }) {
 
-    const { setCartOpen, onCloseInBasketClick } = useContext(AppContext);
+    const { onCloseInBasketClick } = useContext(AppContext);
 
     return (
         <div className="cart-empty">
@@ -15,7 +15,7 @@ export default function CartEmpty({ image, imageAlt, title, description }) {
             <p className="cart-empty__description">{description}</p>
             <button className="cart-empty__btn" onClick={ () => onCloseInBasketClick(false) }>
                 <div className="cart-empty__btn-before">
-                    <img src="/image/arrow-left.svg" alt="arrow"/>
+                    <img src="image/arrow-left.svg" alt="arrow"/>
                 </div>
                 <p>Назад к покупкам</p>
             </button>
