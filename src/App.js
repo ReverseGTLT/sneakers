@@ -67,12 +67,23 @@ function App() {
     };
     const addToFavorites = async (obj) => {
         try{
-            if (favoriteItems.find(itemObj => itemObj.id === obj.id)) {
-                setFavoriteItems(prevState => prevState.filter(item => item.id !== obj.id));
-                axios.delete(`${URL_FAVORITES}/${obj.id}`);
+            const findItem = favoriteItems.find(itemObj => itemObj.parentId === obj.id);
+            if (findItem) {
+                setFavoriteItems(prevState => prevState.filter(item => item.parentId !== obj.id));
+                axios.delete(`${URL_FAVORITES}/${findItem.id}`);
             } else {
+                setFavoriteItems(prevState => [...prevState, obj]);
                 const {data} = await axios.post(URL_FAVORITES, obj);
-                setFavoriteItems(prevState => [...prevState, data]);
+                setFavoriteItems(prevState => prevState.map((item) => {
+                    if (item.parentId === data.parentId) {
+                        return {
+                            ...item,
+                            id: data.id
+                        }
+                    }
+                    return item;
+                }))
+
             }
         } catch {
             console.log('Failed add to favorites');
@@ -81,6 +92,11 @@ function App() {
     const removeFromCart = (id) => {
         setCartItems(prevState => prevState.filter(item => item.id !== id.id));
         axios.delete(`${URL_USER_CART}/${id.id}`);
+    };
+    const removeFromFavorite = (id) => {
+        console.log(id)
+        setFavoriteItems(prevState => prevState.filter(item => item.id !== id.id));
+        axios.delete(`${URL_FAVORITES}/${id.id}`);
     };
     const isItemAdded = (title) => {
         return cartItems.some((obj) => obj.title === title)
@@ -98,7 +114,7 @@ function App() {
 
     return (
         <>
-            <AppContext.Provider value={ { item,  cartItems, favoriteItems, isItemAdded, isItemFavorite, onCloseInBasketClick, setCartItems, sum } }>
+            <AppContext.Provider value={ { item,  cartItems, favoriteItems, isItemAdded, isItemFavorite, onCloseInBasketClick, setCartItems, sum, removeFromFavorite } }>
                 <div className="wrapper">
                     {cartOpen &&
                         <Overlay

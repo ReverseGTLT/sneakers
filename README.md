@@ -1,4 +1,6 @@
-
+If you want to download the project, specify the correct path to images and pages.
+For example src={process.env.PUBLIC_URL + '/image/logo.svg'} to src='image/logo.svg' 
+&& Route exact path="favorites" to Route exact path="/favorites"
 
 # Getting Started with Create React App
 

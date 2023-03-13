@@ -22,10 +22,9 @@ export default function Content({
                 <Card image={item.image}
                       title={item.title}
                       price={item.price}
-                      id={item.title}
                       cartItems={cartItems}
                       key={index}
-                      onPlus={() => addToCart(item)}
+                      addToCart={() => addToCart(item)}
                       onFavorite={() => addToFavorites(item)}
                       addedToCartItem={cartItems.some(obj => Number(obj.id) === Number(item.id))}
                 />
