@@ -20,7 +20,7 @@ export default function Favorites({  addToFavorites, addToCart, isLoading }) {
                               price={item.price}
                               key={index}
                               favorited={true}
-                              onPlus={() => addToCart(item)}
+                              addToCart={() => addToCart(item)}
                               onFavorite={() => addToFavorites(item)}
                         />
                     )) }

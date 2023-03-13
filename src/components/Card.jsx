@@ -1,13 +1,13 @@
 import {useState} from "react";
 import React, {useContext} from "react";
 import {AppContext} from "../App";
-export default function Card({ onPlus, image, price, title, onFavorite, favorited = false, addedToCartItem = false }) {
+export default function Card({ onPlus: addToCart, image, price, title, onFavorite, favorited = false, addedToCartItem = false }) {
     const [added,setAdded] = useState(addedToCartItem);
     const [addedFavorite, setAddedFavorite] = useState(favorited);
 
     const { isItemAdded, isItemFavorite } = React.useContext(AppContext)
-    const addToCart = () => {
-        onPlus();
+    const onAddToCart = () => {
+        addToCart();
         setAdded(!added);
     }
 
@@ -47,7 +47,7 @@ export default function Card({ onPlus, image, price, title, onFavorite, favorite
                     <p className="card__price">Цена:</p>
                     <p className="card__sum">{price} руб.</p>
                 </div>
-                <div className="card__plus cursor" onClick={addToCart}>
+                <div className="card__plus cursor" onClick={onAddToCart}>
                     <img src={isItemAdded(title) ? process.env.PUBLIC_URL + '/image/plus-done.svg' : process.env.PUBLIC_URL + '/image/plus.svg'} alt="plus"/>
                 </div>
             </div>

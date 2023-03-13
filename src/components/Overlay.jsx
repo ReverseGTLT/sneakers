@@ -63,7 +63,7 @@ export default function Overlay({ onClickRemove }) {
                                             title={item.title}
                                             price={item.price}
                                             image={item.image}
-                                            onClickRemove={onClickRemove}
+                                            onClickRemove={() => onClickRemove(item)}
                                             key={index}
                                             itemId={item.id}
                                             cartItems={cartItems}

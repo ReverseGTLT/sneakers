@@ -67,9 +67,9 @@ function App() {
     };
     const addToFavorites = async (obj) => {
         try{
-            if (favoriteItems.find(itemObj => itemObj.parentId === obj.id)) {
-                axios.delete(`${URL_FAVORITES}/${obj.id}`);
+            if (favoriteItems.find(itemObj => itemObj.id === obj.id)) {
                 setFavoriteItems(prevState => prevState.filter(item => item.id !== obj.id));
+                axios.delete(`${URL_FAVORITES}/${obj.id}`);
             } else {
                 const {data} = await axios.post(URL_FAVORITES, obj);
                 setFavoriteItems(prevState => [...prevState, data]);
@@ -79,8 +79,8 @@ function App() {
         }
     };
     const removeFromCart = (id) => {
-        setCartItems(prevState => prevState.filter(item => item.id !== id));
-        axios.delete(`${URL_USER_CART}/${id}`);
+        setCartItems(prevState => prevState.filter(item => item.id !== id.id));
+        axios.delete(`${URL_USER_CART}/${id.id}`);
     };
     const isItemAdded = (title) => {
         return cartItems.some((obj) => obj.title === title)
@@ -91,14 +91,14 @@ function App() {
     const onCloseInBasketClick = () => {
         return setCartOpen(false)
     };
-    let sum = cartItems.reduce((acc, item) => {
+    const sum = cartItems.reduce((acc, item) => {
         acc += +item.price.replace(' ', '')
         return acc
     }, 0)
 
     return (
         <>
-            <AppContext.Provider value={ { item, cartItems, favoriteItems, isItemAdded, isItemFavorite, onCloseInBasketClick, setCartItems, sum } }>
+            <AppContext.Provider value={ { item,  cartItems, favoriteItems, isItemAdded, isItemFavorite, onCloseInBasketClick, setCartItems, sum } }>
                 <div className="wrapper">
                     {cartOpen &&
                         <Overlay
