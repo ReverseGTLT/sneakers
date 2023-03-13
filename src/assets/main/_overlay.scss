@@ -111,6 +111,9 @@
     align-items: center;
     margin-bottom: 30px;
     overflow: auto;
+    @include md {
+      flex-direction: column;
+    }
     &__image {
       width: 133px;
       img {

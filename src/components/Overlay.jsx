@@ -50,7 +50,7 @@ export default function Overlay({ onClickRemove }) {
                     </div>
                     {cartItems.length === 0 ?
                         <CartEmpty
-                            image={isDone ? "image/cart-done.png" : "image/empty-cart.png"}
+                            image={isDone ?  "/image/cart-done.png" : "/image/empty-cart.png"}
                             title={isDone ? "Заказ оформлен!" : "Корзина пустая"}
                             description={isDone ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
                         />
@@ -83,7 +83,7 @@ export default function Overlay({ onClickRemove }) {
                                 </div>
                                 <button className="cart-btn" disabled={isLoading} onClick={onClickOrder}>
                                     <p className="cart-btn__title">Оформить заказ</p>
-                                    <img src="image/arrow.svg" alt="arrow" className="cart-btn__image"/>
+                                    <img src={process.env.PUBLIC_URL + "/image/arrow.svg"} alt="arrow" className="cart-btn__image"/>
                                 </button>
                             </div>
                         </>}

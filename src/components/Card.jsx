@@ -37,7 +37,7 @@ export default function Card({ onPlus, image, price, title, onFavorite, favorite
 
             </div>
             <div className="card__image">
-                <img src={image} alt=""/>
+                <img src={process.env.PUBLIC_URL + image} alt=""/>
             </div>
             <h2 className="card__title">
                 {title}
@@ -48,7 +48,7 @@ export default function Card({ onPlus, image, price, title, onFavorite, favorite
                     <p className="card__sum">{price} руб.</p>
                 </div>
                 <div className="card__plus cursor" onClick={addToCart}>
-                    <img src={isItemAdded(title) ? 'image/plus-done.svg' : 'image/plus.svg'} alt="plus"/>
+                    <img src={isItemAdded(title) ? process.env.PUBLIC_URL + '/image/plus-done.svg' : process.env.PUBLIC_URL + '/image/plus.svg'} alt="plus"/>
                 </div>
             </div>
         </div>

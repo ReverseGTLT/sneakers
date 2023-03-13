@@ -5,7 +5,7 @@ export default function OrderCard({ image, title, price }) {
     return (
         <div className="card">
             <div className="card__image">
-                <img src={image} alt=""/>
+                <img src={process.env.PUBLIC_URL + image} alt=""/>
             </div>
             <h2 className="card__title">
                 {title}

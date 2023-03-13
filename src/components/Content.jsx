@@ -38,7 +38,7 @@ export default function Content({
             <div className="content-info">
                 <h1 className="content__title">{searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кроссовки"}</h1>
                 <div className="search-box">
-                    <img className="search-image" src="image/search.svg" alt="Search"/>
+                    <img className="search-image" src={process.env.PUBLIC_URL + "/image/search.svg"} alt="Search"/>
                     <input className="search-input" onChange={searchMain} value={searchValue} type="text" placeholder="Поиск..."/>
                     {searchValue && <div className="cart-item__cancel" onClick={() => getSetSearchItem('')}>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

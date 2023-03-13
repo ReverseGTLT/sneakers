@@ -201,6 +201,11 @@ a {
   margin-bottom: 30px;
   overflow: auto;
 }
+@media (max-width: 767.8px) {
+  .cart-item {
+    flex-direction: column;
+  }
+}
 .cart-item__image {
   width: 133px;
 }

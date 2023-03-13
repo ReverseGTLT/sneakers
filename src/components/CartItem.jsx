@@ -5,7 +5,7 @@ export default function CartItem({ title, price, image, onClickRemove, itemId })
     return (
         <div className="cart-item">
             <div className="cart-item__image">
-                <img src={image} alt="Sneakers"/>
+                <img src={process.env.PUBLIC_URL + image} alt="Sneakers"/>
             </div>
             <div className="cart-item__info">
                 <p className="cart-item__title">{title}</p>
