@@ -1,8 +1,9 @@
 import Card from "./Card";
 import React, {useContext} from "react";
 import {AppContext} from "../App";
+import MyLoader from "./Skeleton";
 
-export default function Favorites({  addToFavorites, addToCart }) {
+export default function Favorites({  addToFavorites, addToCart, isLoading }) {
 
     const { favoriteItems } = React.useContext(AppContext)
 
@@ -12,15 +13,13 @@ export default function Favorites({  addToFavorites, addToCart }) {
                 <h1 className="content__title">Избранное</h1>
             </div>
             <div className="content-cards">
-                { favoriteItems
+                { isLoading ? MyLoader() : favoriteItems
                     .map((item, index) => (
                         <Card image={item.image}
                               title={item.title}
                               price={item.price}
                               key={index}
                               favorited={true}
-                              // onPlus={() => targetCartItems(item)}
-                              // onFavorite={() => addToFavorites(item)}
                               onPlus={() => addToCart(item)}
                               onFavorite={() => addToFavorites(item)}
                         />

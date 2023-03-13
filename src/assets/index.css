@@ -75,6 +75,9 @@ a {
   line-height: 17px;
   color: #5C5C5C;
 }
+.header-right__account {
+  cursor: pointer;
+}
 
 .skeleton {
   margin-bottom: 50px;

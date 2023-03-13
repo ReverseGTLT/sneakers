@@ -6,7 +6,7 @@ import axios from "axios";
 
 const URL = 'https://64023e33f61d96ac4866f0b0.mockapi.io/items';
 export const URL_USER_CART = 'https://64023e33f61d96ac4866f0b0.mockapi.io/userCart';
-const URL_FAVORITES = 'https://64062d8f40597b65de4c746a.mockapi.io/favorites';
+export const URL_FAVORITES = 'https://64062d8f40597b65de4c746a.mockapi.io/favorites';
 export const URL_ORDERS = 'https://64062d8f40597b65de4c746a.mockapi.io/orders';
 
 export const AppContext = createContext({})
@@ -36,8 +36,8 @@ function App() {
     };
     const addToFavorites = async (obj) => {
         try{
-            if (favoriteItems.find(itemObj => Number(itemObj.id) === Number(obj.id))) {
-                setFavoriteItems(prevState => prevState.filter(item => Number(item.id) !== Number(obj.id)));
+            if (favoriteItems.find(itemObj => itemObj.title === obj.title)) {
+                setFavoriteItems(prevState => prevState.filter(item => item.title !== obj.title));
                 axios.delete(`${URL_FAVORITES}/${obj.id}`);
             } else {
                 const res = await axios.post(URL_FAVORITES, obj);
@@ -48,8 +48,9 @@ function App() {
         }
     };
     const removeFromCart = (id) => {
-        axios.delete(`${URL_USER_CART}/${id}`);
+
         setCartItems(prevState => prevState.filter(item => item.id !== id));
+        axios.delete(`${URL_USER_CART}/${id}`);
 
     };
     const isItemAdded = (title) => {
@@ -89,10 +90,10 @@ function App() {
             <AppContext.Provider value={ { item, cartItems, favoriteItems, isItemAdded, isItemFavorite, onCloseInBasketClick, setCartItems } }>
                 <div className="wrapper">
                     {cartOpen &&
-                    <Overlay
-                        cartItems={cartItems}
-                        onClickRemove={removeFromCart}
-                    />}
+                        <Overlay
+                            cartItems={cartItems}
+                            onClickRemove={removeFromCart}
+                        />}
 
                     <Header setCartOpen={() => setCartOpen(true)}/>
 

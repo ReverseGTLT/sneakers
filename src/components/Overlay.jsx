@@ -52,44 +52,44 @@ export default function Overlay({ onClickRemove }) {
                         </div>
                     </div>
                     {cartItems.length === 0 ?
-                    <CartEmpty
-                        image={isDone ? "/image/cart-done.png" : "/image/empty-cart.png"}
-                        title={isDone ? "Заказ оформлен!" : "Корзина пустая"}
-                        description={isDone ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
-                    />
+                        <CartEmpty
+                            image={isDone ? "/image/cart-done.png" : "/image/empty-cart.png"}
+                            title={isDone ? "Заказ оформлен!" : "Корзина пустая"}
+                            description={isDone ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+                        />
                         :
-                    <>
-                        <div className="cart-items">
-                            {cartItems
-                                .map((item, index) => (
-                                    <CartItem
-                                        title={item.title}
-                                        price={item.price}
-                                        image={item.image}
-                                        onClickRemove={onClickRemove}
-                                        key={index}
-                                        itemId={item.id}
-                                        cartItems={cartItems}
-                                    />
-                                ))}
-                        </div>
-                        <div className="cart-footer">
-                            <div className="cart-footer__item">
-                                <p className="cart-footer__title">Итого:</p>
-                                <div className="cart-footer__dots"></div>
-                                <p className="cart-footer__description">{`${sum} руб.`}</p>
+                        <>
+                            <div className="cart-items">
+                                {cartItems
+                                    .map((item, index) => (
+                                        <CartItem
+                                            title={item.title}
+                                            price={item.price}
+                                            image={item.image}
+                                            onClickRemove={onClickRemove}
+                                            key={index}
+                                            itemId={item.id}
+                                            cartItems={cartItems}
+                                        />
+                                    ))}
                             </div>
-                            <div className="cart-footer__item">
-                                <p className="cart-footer__title">Налог 5%: руб.</p>
-                                <div className="cart-footer__dots"></div>
-                                <p className="cart-footer__description">{`${(sum/100*5).toFixed(2)} руб.`}</p>
+                            <div className="cart-footer">
+                                <div className="cart-footer__item">
+                                    <p className="cart-footer__title">Итого:</p>
+                                    <div className="cart-footer__dots"></div>
+                                    <p className="cart-footer__description">{`${sum} руб.`}</p>
+                                </div>
+                                <div className="cart-footer__item">
+                                    <p className="cart-footer__title">Налог 5%: руб.</p>
+                                    <div className="cart-footer__dots"></div>
+                                    <p className="cart-footer__description">{`${(sum/100*5).toFixed(2)} руб.`}</p>
+                                </div>
+                                <button className="cart-btn" disabled={isLoading} onClick={onClickOrder}>
+                                    <p className="cart-btn__title">Оформить заказ</p>
+                                    <img src="/image/arrow.svg" alt="arrow" className="cart-btn__image"/>
+                                </button>
                             </div>
-                            <button className="cart-btn" disabled={isLoading} onClick={onClickOrder}>
-                                <p className="cart-btn__title">Оформить заказ</p>
-                                <img src="/image/arrow.svg" alt="arrow" className="cart-btn__image"/>
-                            </button>
-                        </div>
-                    </>}
+                        </>}
                 </div>
             </div>
         </div>
