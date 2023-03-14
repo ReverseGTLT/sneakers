@@ -315,6 +315,12 @@ a {
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 767.8px) {
+  .content-info {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
 .content-cards {
   padding-top: 30px;
   display: grid;

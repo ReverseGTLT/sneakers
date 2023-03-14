@@ -16,6 +16,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include md {
+      flex-direction: column;
+      gap: 30px;
+    }
   }
   &-cards {
     padding-top: 30px;
